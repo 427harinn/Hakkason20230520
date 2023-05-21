@@ -30,6 +30,7 @@ public class CatmoveScript : MonoBehaviour
 
     
     private string enemyTag = "Enemy";
+    private string deadAreaTag = "DeadArea";
     private bool isDown = false;
 
     // Start is called before the first frame update
@@ -37,6 +38,12 @@ public class CatmoveScript : MonoBehaviour
     {
         catanim = GetComponent<Animator>();
         catrb = GetComponent<Rigidbody2D>();
+    }
+
+
+    private void Update()
+    {
+        Fireatack();
     }
 
     // Update is called once per frame
@@ -111,8 +118,17 @@ public class CatmoveScript : MonoBehaviour
             }
 
             catrb.velocity = new Vector2(xSpeed, ySpeed);
+
+            
         }
 
+    }
+
+    private void Fireatack()
+    {
+        if(Input.GetMouseButtonDown(0)) {
+            transform.Find("fireattackImage").gameObject.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -126,15 +142,21 @@ public class CatmoveScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == deadAreaTag)
+        {
+            Invoke("activelose", 1.0f);
+        }
+    }
+
     void activelose()
     {
-        //loseImage.SetActive(true);
-
+        loseImage.SetActive(true);
         transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
-
-        //GManager.instance.fadeanimation();
         Invoke("ChangeScene", 2.5f);
     }
+
     void ChangeScene()
     {
         SceneManager.LoadScene("StageSelectScene");

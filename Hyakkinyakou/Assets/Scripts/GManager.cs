@@ -6,6 +6,7 @@ public class GManager : MonoBehaviour
 {
     public static GManager instance = null;
 
+    public int specialatackNum;
 
     private void Awake()
     {

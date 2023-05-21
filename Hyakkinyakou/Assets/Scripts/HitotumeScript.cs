@@ -11,6 +11,10 @@ public class HitotumeScript : MonoBehaviour
     private Rigidbody2D rb = null;
     private SpriteRenderer sr = null;
     private bool rightTleftF = false;
+
+    public HitotumeCollisionScript checkCollision;
+
+    private string fireattackTag = "FireAttack";
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,10 @@ public class HitotumeScript : MonoBehaviour
     {
         if (sr.isVisible || nonVisibleAct)
         {
+            if (checkCollision.isOn)
+            {
+                rightTleftF = !rightTleftF;
+            }
             int xVector = -1;
             if (rightTleftF)
             {
@@ -40,4 +48,18 @@ public class HitotumeScript : MonoBehaviour
             rb.Sleep();
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == fireattackTag)
+        {
+            Debug.Log(collision.collider.tag);
+            Destroy(this.gameObject);
+        }
+    }
+
+
+
+
+
 }

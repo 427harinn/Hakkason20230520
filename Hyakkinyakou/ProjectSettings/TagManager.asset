@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - DeadArea
+  - FireAttack
   layers:
   - Default
   - TransparentFX
@@ -40,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: TileMap
+    uniqueID: 2875308873
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
