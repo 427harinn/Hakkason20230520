@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - DeadArea
   - FireAttack
+  - Cat
   layers:
   - Default
   - TransparentFX
