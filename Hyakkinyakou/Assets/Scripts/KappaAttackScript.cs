@@ -26,11 +26,9 @@ public class KappaAttackScript : MonoBehaviour
     void Update()
     {
         animationflag = kappascript.animationflag;
-        Debug.Log(animationflag);
         if (animationflag)
         {
             Transform myTransform = this.transform;
-
             // À•W‚ğæ“¾
             Vector3 pos = myTransform.position;
             pos.x -= 0.02f;    // xÀ•W‚Ö0.01‰ÁZ
