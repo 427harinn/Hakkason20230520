@@ -5,6 +5,7 @@ using UnityEngine;
 public class LantanScript : MonoBehaviour
 {
     private string fireattackTag = "FireAttack";
+    private string specialattackTag = "SpecialAttack";
 
     private Animator lantananim = null;
     private BoxCollider2D collider = null;
@@ -23,7 +24,7 @@ public class LantanScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == fireattackTag)
+        if (collision.collider.tag == fireattackTag || collision.collider.tag == specialattackTag)
         {
             lantananim.SetBool("lantanstart", true);
         }

@@ -43,7 +43,8 @@ public class CatmoveScript : MonoBehaviour
 
     private void Update()
     {
-        Fireatack();
+        Fireattack();
+        SpecialAttack();
     }
 
     // Update is called once per frame
@@ -124,10 +125,19 @@ public class CatmoveScript : MonoBehaviour
 
     }
 
-    private void Fireatack()
+    private void Fireattack()
     {
         if(Input.GetMouseButtonDown(0)) {
             transform.Find("fireattackImage").gameObject.SetActive(true);
+        }
+    }
+
+    private void SpecialAttack()
+    {
+        if (Input.GetMouseButtonDown(1) && GManager.instance.specialatackNum != 0)
+        {
+            GManager.instance.specialatackNum--;
+            
         }
     }
 

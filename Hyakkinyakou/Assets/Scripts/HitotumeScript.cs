@@ -15,6 +15,7 @@ public class HitotumeScript : MonoBehaviour
     public HitotumeCollisionScript checkCollision;
 
     private string fireattackTag = "FireAttack";
+    private string specialattackTag = "SpecialAttack";
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +52,7 @@ public class HitotumeScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == fireattackTag)
+        if (collision.collider.tag == fireattackTag || collision.collider.tag == specialattackTag)
         {
             Debug.Log(collision.collider.tag);
             Destroy(this.gameObject);
