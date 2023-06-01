@@ -9,6 +9,7 @@ TagManager:
   - DeadArea
   - FireAttack
   - Cat
+  - SpecialAttack
   layers:
   - Default
   - TransparentFX

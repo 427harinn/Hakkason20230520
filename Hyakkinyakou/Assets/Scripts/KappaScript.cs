@@ -5,6 +5,7 @@ using UnityEngine;
 public class KappaScript : MonoBehaviour
 {
     private string fireattackTag = "FireAttack";
+    private string specialattackTag = "SpecialAttack";
 
     public bool animationflag;
     // Start is called before the first frame update
@@ -21,7 +22,7 @@ public class KappaScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == fireattackTag)
+        if (collision.collider.tag == fireattackTag || collision.collider.tag == specialattackTag)
         {
             Debug.Log(collision.collider.tag);
             Destroy(this.gameObject);
