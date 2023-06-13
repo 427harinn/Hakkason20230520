@@ -11,6 +11,8 @@ public class CatmoveScript : MonoBehaviour
     [SerializeField] AudioSource stagesource;
     [SerializeField] AudioClip badmusic;
     [SerializeField] AudioClip winmusic;
+    [SerializeField] AudioClip attackAudioClip;
+    [SerializeField] AudioClip attackitemAudioClip;
 
     private Animator catanim = null;
     private Rigidbody2D catrb = null;
@@ -37,9 +39,13 @@ public class CatmoveScript : MonoBehaviour
     private string enemyTag = "Enemy";
     private string deadAreaTag = "DeadArea";
     private string goalTag = "goal";
+    private string attackitemTag = "AttackItem";
     private bool isDown = false;
 
     AudioSource attackaudioSource;
+
+    int itemgetcount = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +60,7 @@ public class CatmoveScript : MonoBehaviour
     {
         Fireattack();
         SpecialAttack();
+        itemgetcount++;
     }
 
     // Update is called once per frame
@@ -136,8 +143,8 @@ public class CatmoveScript : MonoBehaviour
 
     private void Fireattack()
     {
-        if(Input.GetMouseButtonDown(0)) {
-            attackaudioSource.PlayOneShot(attackaudioSource.clip);
+        if(Input.GetMouseButtonDown(0) && isGround) {
+            attackaudioSource.PlayOneShot(attackAudioClip);
             transform.Find("fireattackImage").gameObject.SetActive(true);
         }
     }
@@ -146,7 +153,7 @@ public class CatmoveScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && GManager.instance.specialatackNum != 0)
         {
-            attackaudioSource.PlayOneShot(attackaudioSource.clip);
+            attackaudioSource.PlayOneShot(attackAudioClip);
             GManager.instance.specialatackNum--;
             Vector3 instantiatepos = this.gameObject.transform.position;
             int scale = 0;
@@ -185,10 +192,20 @@ public class CatmoveScript : MonoBehaviour
         {
             Invoke("activewin", 1.0f);
         }
+        if(collision.tag == attackitemTag)
+        {
+            if(itemgetcount > 50)
+            {
+                attackaudioSource.PlayOneShot(attackitemAudioClip);
+                GManager.instance.specialatackNum++;
+                itemgetcount = 0;
+            }
+        }
     }
 
     void activelose()
     {
+        GManager.instance.specialatackNum = 0;
         stagesource.PlayOneShot(badmusic);
         loseImage.SetActive(true);
         transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
@@ -196,6 +213,7 @@ public class CatmoveScript : MonoBehaviour
     }
     void activewin()
     {
+        GManager.instance.specialatackNum = 0;
         stagesource.PlayOneShot(winmusic);
         winImage.SetActive(true);
         transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();

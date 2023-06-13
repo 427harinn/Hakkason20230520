@@ -15,7 +15,7 @@ public class BackgroundmoveScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.Translate(MoveSpeed, 0, 0, Space.World);
     }
