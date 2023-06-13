@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class CatmoveScript : MonoBehaviour
 {
     [SerializeField] GameObject loseImage;
+    [SerializeField] GameObject winImage;
+
+    [SerializeField] AudioSource stagesource;
+    [SerializeField] AudioClip badmusic;
+    [SerializeField] AudioClip winmusic;
 
     private Animator catanim = null;
     private Rigidbody2D catrb = null;
@@ -31,13 +36,17 @@ public class CatmoveScript : MonoBehaviour
     
     private string enemyTag = "Enemy";
     private string deadAreaTag = "DeadArea";
+    private string goalTag = "goal";
     private bool isDown = false;
+
+    AudioSource attackaudioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         catanim = GetComponent<Animator>();
         catrb = GetComponent<Rigidbody2D>();
+        attackaudioSource = GetComponent<AudioSource>();
     }
 
 
@@ -128,6 +137,7 @@ public class CatmoveScript : MonoBehaviour
     private void Fireattack()
     {
         if(Input.GetMouseButtonDown(0)) {
+            attackaudioSource.PlayOneShot(attackaudioSource.clip);
             transform.Find("fireattackImage").gameObject.SetActive(true);
         }
     }
@@ -136,8 +146,21 @@ public class CatmoveScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && GManager.instance.specialatackNum != 0)
         {
+            attackaudioSource.PlayOneShot(attackaudioSource.clip);
             GManager.instance.specialatackNum--;
-            
+            Vector3 instantiatepos = this.gameObject.transform.position;
+            int scale = 0;
+            if(this.gameObject.transform.localScale.x == 1)
+            {
+                scale = 1;
+                instantiatepos.x += 1;
+            } else
+            {
+                scale = -1;
+                instantiatepos.x -= 1;
+            }
+            GameObject obj = Instantiate((GameObject)Resources.Load("Prefab/specialattackImage"), instantiatepos, Quaternion.identity, GameObject.Find("backImage").transform);
+            obj.transform.localScale = new Vector3(scale, 1, 1);
         }
     }
 
@@ -158,11 +181,23 @@ public class CatmoveScript : MonoBehaviour
         {
             Invoke("activelose", 1.0f);
         }
+        if (collision.tag == goalTag)
+        {
+            Invoke("activewin", 1.0f);
+        }
     }
 
     void activelose()
     {
+        stagesource.PlayOneShot(badmusic);
         loseImage.SetActive(true);
+        transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
+        Invoke("ChangeScene", 2.5f);
+    }
+    void activewin()
+    {
+        stagesource.PlayOneShot(winmusic);
+        winImage.SetActive(true);
         transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
         Invoke("ChangeScene", 2.5f);
     }

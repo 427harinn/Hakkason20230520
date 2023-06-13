@@ -12,11 +12,14 @@ public class KappaAttackScript : MonoBehaviour
     public KappaScript kappascript;
     bool animationflag = false;
 
+    CircleCollider2D collider;
+
     Vector3 initPosi; //å≥ÇÃç¿ïW
     Transform myTransform ;
     // Start is called before the first frame update
     void Start()
     {
+        collider = GetComponent<CircleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         initPosi = this.gameObject.transform.position;
         myTransform = this.gameObject.GetComponent<Transform>();
@@ -28,6 +31,7 @@ public class KappaAttackScript : MonoBehaviour
         animationflag = kappascript.animationflag;
         if (animationflag)
         {
+            collider.enabled = true;
             Transform myTransform = this.transform;
             // ç¿ïWÇéÊìæ
             Vector3 pos = myTransform.position;
@@ -35,6 +39,7 @@ public class KappaAttackScript : MonoBehaviour
             myTransform.position = pos;  // ç¿ïWÇê›íË
         } else
         {
+            collider.enabled = false;
             myTransform.position = transform.parent.gameObject.transform.position;
 
         }

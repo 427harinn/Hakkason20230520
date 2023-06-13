@@ -10,6 +10,7 @@ TagManager:
   - FireAttack
   - Cat
   - SpecialAttack
+  - goal
   layers:
   - Default
   - TransparentFX

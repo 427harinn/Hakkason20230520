@@ -24,7 +24,6 @@ public class KappaScript : MonoBehaviour
     {
         if (collision.collider.tag == fireattackTag || collision.collider.tag == specialattackTag)
         {
-            Debug.Log(collision.collider.tag);
             Destroy(this.gameObject);
         }
     }
