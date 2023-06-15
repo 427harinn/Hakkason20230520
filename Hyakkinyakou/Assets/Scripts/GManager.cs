@@ -8,6 +8,9 @@ public class GManager : MonoBehaviour
 
     public int specialatackNum;
 
+    public int stagecount;
+    public int nowstage;
+
     private void Awake()
     {
         if (instance == null)

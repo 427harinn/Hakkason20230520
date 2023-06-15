@@ -190,6 +190,7 @@ public class CatmoveScript : MonoBehaviour
         }
         if (collision.tag == goalTag)
         {
+            GManager.instance.stagecount++;
             Invoke("activewin", 1.0f);
         }
         if(collision.tag == attackitemTag)

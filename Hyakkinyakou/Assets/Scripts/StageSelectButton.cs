@@ -22,8 +22,23 @@ public class StageSelectButton : MonoBehaviour
         GManager.instance.fadeanimation();
         Invoke("ChangeScene1st", 1.5f);
     }
+
+    public void onClicked_2ndbutton()
+    {
+        if(GManager.instance.stagecount >= 1)
+        {
+            GManager.instance.fadeanimation();
+            Invoke("ChangeScene2nd", 1.5f);
+        }
+    }
     void ChangeScene1st()
     {
-        SceneManager.LoadScene("SpringScene");
+        SceneManager.LoadScene("1ststageScene");
     }
+
+    void ChangeScene2nd()
+    {
+        SceneManager.LoadScene("2ndstageScene");
+    }
+
 }
