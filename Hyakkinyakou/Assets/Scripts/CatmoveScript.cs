@@ -46,6 +46,7 @@ public class CatmoveScript : MonoBehaviour
 
     int itemgetcount = 0;
 
+    bool finish;
 
     // Start is called before the first frame update
     void Start()
@@ -195,7 +196,7 @@ public class CatmoveScript : MonoBehaviour
         }
         if(collision.tag == attackitemTag)
         {
-            if(itemgetcount > 50)
+            if(itemgetcount > 10)
             {
                 attackaudioSource.PlayOneShot(attackitemAudioClip);
                 GManager.instance.specialatackNum++;
@@ -206,19 +207,28 @@ public class CatmoveScript : MonoBehaviour
 
     void activelose()
     {
-        GManager.instance.specialatackNum = 0;
-        stagesource.PlayOneShot(badmusic);
-        loseImage.SetActive(true);
-        transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
-        Invoke("ChangeScene", 2.5f);
+        if(!finish)
+        {
+            finish = true;
+            GManager.instance.specialatackNum = 0;
+            stagesource.PlayOneShot(badmusic);
+            loseImage.SetActive(true);
+            transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
+            Invoke("ChangeScene", 2.5f);
+        }
+
     }
     void activewin()
     {
-        GManager.instance.specialatackNum = 0;
-        stagesource.PlayOneShot(winmusic);
-        winImage.SetActive(true);
-        transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
-        Invoke("ChangeScene", 2.5f);
+        if (!finish)
+        {
+            finish = true;
+            GManager.instance.specialatackNum = 0;
+            stagesource.PlayOneShot(winmusic);
+            winImage.SetActive(true);
+            transform.parent.GetComponent<BackgroundmoveScript>().FadeActive();
+            Invoke("ChangeScene", 2.5f);
+        }
     }
 
     void ChangeScene()

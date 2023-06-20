@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class BackGroundMover : MonoBehaviour
 {
 	private const float k_maxLength = 1f;
@@ -39,4 +39,7 @@ public class BackGroundMover : MonoBehaviour
 			m_material.SetTextureOffset(k_propName, Vector2.zero);
 		}
 	}
-}
+
+
+
+ }

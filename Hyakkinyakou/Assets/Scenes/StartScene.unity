@@ -910,6 +910,10 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 4567489333432792838, guid: d95cb031fbef17e45bc60c519d2b88ca, type: 3}
+      propertyPath: stagecount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567489333432792838, guid: d95cb031fbef17e45bc60c519d2b88ca, type: 3}
       propertyPath: specialatackNum
       value: 0
       objectReference: {fileID: 0}

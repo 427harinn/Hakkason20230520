@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GManager : MonoBehaviour
 {
@@ -22,6 +23,14 @@ public class GManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        stagecount = PlayerPrefs.GetInt("STAGE", 0);
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("STAGE", stagecount);
+        PlayerPrefs.Save();
     }
 
     public void fadeanimation()
